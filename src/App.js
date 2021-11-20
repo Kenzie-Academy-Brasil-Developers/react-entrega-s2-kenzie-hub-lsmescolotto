@@ -1,12 +1,26 @@
 import GlobalStyle from "./styles/global";
-import AppHeader from "./components/header";
+import SignUp from "./pages/signUp";
+import Login from "./pages/login";
+import Dashboard from "./pages/dashboard";
+
+import { Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-    <main>
+    <>
       <GlobalStyle />
-      <AppHeader />
-    </main>
+      <Switch>
+        <Route exact path="/">
+          <Login />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
+        </Route>
+        <Route path="/dashboard/:name">
+          <Dashboard />
+        </Route>
+      </Switch>
+    </>
   );
 }
 

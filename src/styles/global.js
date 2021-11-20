@@ -33,10 +33,19 @@ footer, header, hgroup, menu, nav, section {
 }
 body, button, input {
 	line-height: 1;
-    background-color: #F5F5F5;
+    background-color: #FFFFFF;
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     color: #333333;
+}
+h1, h2, h3, h4 {
+	font-weight: 700;
+}
+main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 ol, ul {
 	list-style: none;
