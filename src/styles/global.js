@@ -36,6 +36,7 @@ body, button, input {
     background-color: #F5F5F5;
     font-family: 'Inter', sans-serif;
     font-size: 14px;
+    color: #333333;
 }
 ol, ul {
 	list-style: none;
