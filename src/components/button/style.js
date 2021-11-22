@@ -10,6 +10,7 @@ const AppButton = styled.button`
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 22px;
+  padding: 0;
 `;
 
 export default AppButton;
