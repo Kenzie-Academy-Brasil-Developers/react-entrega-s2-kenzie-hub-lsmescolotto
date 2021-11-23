@@ -1,10 +1,8 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
-
-import { useState } from "react";
 
 import AppHeader from "../../components/header";
 import Button from "../../components/button";
@@ -13,9 +11,7 @@ import api from "../../services/api";
 
 import { SignUpPage, SignUpForm } from "./styles";
 
-const SignUp = () => {
-  const [registered, setRegistered] = useState(false);
-
+const SignUp = ({ authenticated }) => {
   const history = useHistory();
 
   const schema = yup.object().shape({
@@ -66,8 +62,12 @@ const SignUp = () => {
         // return history.push("/");
       })
       .catch((err) => toast.error("Erro ao criar a conta. Tente outro email."));
-    setRegistered(true);
+    // setRegistered(true);
   };
+
+  if (authenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <SignUpPage>

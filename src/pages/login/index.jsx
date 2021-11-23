@@ -1,15 +1,17 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
+import { Toaster, toast } from "react-hot-toast";
 
 import AppHeader from "../../components/header";
 import Button from "../../components/button";
 import Input from "../../components/input";
+import api from "../../services/api";
 
 import { LoginPage, LoginForm } from "./styles";
 
-const Login = () => {
+const Login = ({ authenticated, setAuthenticated }) => {
   const history = useHistory();
 
   const handleNavigation = (path) => {
@@ -17,7 +19,7 @@ const Login = () => {
   };
 
   const schema = yup.object().shape({
-    login: yup.string().required("Campo obrigatório").email("Email inválido"),
+    email: yup.string().required("Campo obrigatório").email("Email inválido"),
     password: yup.string().required("Campo obrigatório"),
   });
 
@@ -28,19 +30,38 @@ const Login = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const submitFunction = (userInfo) => {
-    console.log("logou");
-    history.push(`/dashboard/${userInfo.login}`);
+    api
+      .post("/sessions", userInfo)
+      .then((response) => {
+        const { token } = response.data;
+
+        localStorage.setItem("@Kenziehub:token", JSON.stringify(token));
+
+        setAuthenticated(true);
+
+        return history.push("/dashboard");
+      })
+      .catch((err) =>
+        toast.error("Email ou senha inválidos. Tente novamente.")
+      );
   };
+
+  if (authenticated) {
+    return <Redirect to="/dashboard" />;
+  }
 
   return (
     <LoginPage>
+      <div>
+        <Toaster />
+      </div>
       <AppHeader />
       <LoginForm onSubmit={handleSubmit(submitFunction)}>
         <Input
-          placeholder="Login"
+          placeholder="Email"
           type="text"
           register={register}
-          name="login"
+          name="email"
           error={errors.login?.message}
         />
         <Input

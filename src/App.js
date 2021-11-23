@@ -4,20 +4,36 @@ import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
 
 import { Switch, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [authenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("@Kenziehub:token"));
+
+    if (token) {
+      return setAuthenticated(true);
+    }
+  }, [authenticated]);
   return (
     <>
       <GlobalStyle />
       <Switch>
         <Route exact path="/">
-          <Login />
+          <Login
+            authenticated={authenticated}
+            setAuthenticated={setAuthenticated}
+          />
         </Route>
         <Route path="/signup">
-          <SignUp />
+          <SignUp authenticated={authenticated} />
         </Route>
-        <Route path="/dashboard/:login">
-          <Dashboard />
+        <Route path="/dashboard">
+          <Dashboard
+            authenticated={authenticated}
+            setAuthenticated={setAuthenticated}
+          />
         </Route>
       </Switch>
     </>
