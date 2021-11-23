@@ -52,13 +52,7 @@ export const LoginForm = styled.form`
     width: 40vw;
 
     input {
-      width: 94%;
-    }
-  }
-
-  @media screen and (min-width: 960px) {
-    input {
       width: 95%;
     }
-  } ;
+  }
 `;
