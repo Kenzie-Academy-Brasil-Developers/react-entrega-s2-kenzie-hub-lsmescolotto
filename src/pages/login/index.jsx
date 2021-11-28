@@ -34,8 +34,10 @@ const Login = ({ authenticated, setAuthenticated }) => {
       .post("/sessions", userInfo)
       .then((response) => {
         const { token } = response.data;
+        const { user } = response.data;
 
         localStorage.setItem("@Kenziehub:token", JSON.stringify(token));
+        localStorage.setItem("@Kenziehub:user", JSON.stringify(user));
 
         setAuthenticated(true);
 
@@ -74,7 +76,7 @@ const Login = ({ authenticated, setAuthenticated }) => {
         {/* acrescentar validações da API */}
         <Button type="submit">
           {/* depois trocar pra template string pra conseguir pegar o nome dinamicamente */}
-          Logar{" "}
+          Logar
         </Button>
         <p>
           Criar uma página para mostrar suas{" "}

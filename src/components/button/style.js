@@ -11,6 +11,10 @@ const AppButton = styled.button`
   font-weight: 600;
   margin-bottom: 22px;
   padding: 0;
+  &:hover {
+    cursor: pointer;
+    filter: brightness(0.9);
+  }
 `;
 
 export default AppButton;

@@ -1,4 +1,3 @@
-import { appendErrors } from "react-hook-form";
 import { Container, AppInput } from "./styles";
 
 const Input = ({ placeholder, type, register, name, error, ...rest }) => {

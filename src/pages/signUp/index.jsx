@@ -59,7 +59,7 @@ const SignUp = ({ authenticated }) => {
       .post("/users", user)
       .then((_) => {
         toast.success("Conta criada com sucesso!");
-        // return history.push("/");
+        return history.push("/");
       })
       .catch((err) => toast.error("Erro ao criar a conta. Tente outro email."));
     // setRegistered(true);

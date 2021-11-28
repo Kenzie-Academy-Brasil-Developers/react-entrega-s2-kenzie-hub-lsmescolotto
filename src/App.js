@@ -3,6 +3,8 @@ import SignUp from "./pages/signUp";
 import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
 
+import { Toaster } from "react-hot-toast";
+
 import { Switch, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -19,6 +21,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
+      <Toaster />
       <Switch>
         <Route exact path="/">
           <Login
